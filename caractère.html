@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Tableau avec CSS</title>
+    <link rel="stylesheet" href="caractere.css">
+</head>
+<body>
+
+    <header>
+
+    <form id="tableForm">
+        <label for="table">Couleur du tableau :</label>
+        <input type="text" id="table" name="table" value="pink">
+
+<label for="nbColonnes">Nombre de colonnes :</label>
+<input type="number" id="nbColonnes" name="nbColonnes" min="1" required value="15"><br><br>
+        
+<label for="nbLignes">Nombre de lignes :</label>
+<input type="number" id="nbLignes" name="nbLignes" min="1" required value="15"><br><br>
+<button type="submit">GO</button>
+</header>
+<div id="tableContainer"></div>
+
+<script>
+    
+    document.getElementById('tableForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        var tableColor = document.getElementById('table').value;
+        var nbColonnes = Number(document.getElementById('nbColonnes').value);
+        var nbLignes = Number(document.getElementById('nbLignes').value);
+         var tableHtml = '<table style="background-color: ' + tableColor + ';">';
+
+        for (var i = 0; i < nbLignes+1; i++) {
+            tableHtml += '<tr>';
+            for (var j = 0; j < nbColonnes+1; j++) {
+                if (i === 0) {
+                    if (j===0){
+                        tableHtml += '<th>' + '</th>';
+                    }
+                    else {
+                        tableHtml += '<th>' + (j-1) + '</th>';
+                    }
+                } else {
+                    if (j===0){
+                    tableHtml += '<th>' + (i-1) + '</th>';
+                    }
+                    else{
+
+
+                        
+                        tableHtml += '<th>' + "&#" + (i*((nbColonnes+nbLignes)-1)+j) + "</th>";
+
+                    }
+                }
+            }
+            tableHtml += '</tr>';
+        }
+        tableHtml += '</table>';
+
+        document.getElementById('tableContainer').innerHTML = tableHtml;
+        
+    })
+
+
+</script>
+</body>
+</html>
